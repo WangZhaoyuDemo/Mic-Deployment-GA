@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the code for a microservices deployment model that leverages the Alibaba Cloud 2022 microservices trace dataset for analysis and optimization. The model provides tools for analyzing microservice performance, resource utilization, and deployment strategies.
+This repository contains the code for a microservices deployment model that leverages the Alibaba Cloud 2022 microservices trace dataset for analysis and optimization. The model uses a genetic algorithm to optimize microservice deployment strategies based on resource utilization, communication costs, and deployment time.
 
 ## Dataset Source
 
@@ -12,95 +12,99 @@ The model uses the Alibaba Cloud 2022 open-source microservices trace dataset:
 ## Project Structure
 
 ```
-Model/
-├── src/             # Source code directory
-├── data/            # Data storage directory
-├── scripts/         # Utility scripts
-├── tests/           # Test files
-├── requirements.txt # Dependencies
-└── README.md        # This file
+Mic Deployment GA/
+├── Model/            # Main code directory
+│   ├── GA.py         # Genetic algorithm implementation
+│   ├── __init__.py   # Package initialization
+│   ├── main.py       # Main script
+│   ├── test.py       # Test file
+│   └── util.py       # Utility functions
+├── README.md         # This file
+└── requirements.text # Dependencies
 ```
 
 ## Features
 
-- Microservice deployment analysis
-- Resource utilization optimization
-- Performance prediction
-- Scaling strategy recommendations
-- Call graph analysis
+- Genetic algorithm-based microservice deployment optimization
+- Resource utilization analysis
+- Communication cost optimization
+- Deployment time minimization
+- Support for different deployment strategies (load balancing, consolidation)
+- Parameter tuning for genetic algorithm (crossover rate, mutation rate)
 
 ## Installation
 
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd Mic Deployment GA/Model
+   cd Mic Deployment GA
    ```
 
 2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirements.text
    ```
 
 ## Usage
 
 ### Basic Usage
 
-```python
-from model import DeploymentAnalyzer
+1. Ensure you have the Alibaba Cloud 2022 microservices trace dataset downloaded and prepared.
 
-# Initialize analyzer
-analyzer = DeploymentAnalyzer()
+2. Run the main script:
+   ```bash
+   python Model/main.py
+   ```
 
-# Load data
-data = analyzer.load_data('path/to/data')
+3. The script will:
+   - Load and process the dataset
+   - Build communication network matrices
+   - Analyze microservice call graphs
+   - Apply genetic algorithm to optimize deployment
+   - Test different mutation rates and report results
 
-# Analyze deployment
-results = analyzer.analyze_deployment(data)
+### Customization
 
-# Generate recommendations
-recommendations = analyzer.generate_recommendations(results)
-```
+You can modify the genetic algorithm parameters in `main.py`:
 
-### Command Line Interface
+- Crossover rate: Adjust the `crossover` parameter in the `GA.train()` call
+- Mutation rate: Adjust the `mutations` parameter in the `GA.train()` call
+- Population size: Modify the `pn` variable in the `train()` function in `GA.py`
+- Iterations: Modify the `iterators` variable in the `train()` function in `GA.py`
 
-```bash
-python -m model.cli --data path/to/data --output results/
-```
+## Key Components
 
-## Configuration
+### GA.py
 
-The model can be configured through the `config.yml` file, which allows setting parameters for:
+Implements the genetic algorithm for microservice deployment optimization, including:
+- Solution generation (load balancing, consolidation)
+- Fitness function calculation
+- Selection, crossover, and mutation operations
+- Training loop with parameter optimization
 
-- Data processing options
-- Analysis algorithms
-- Visualization settings
-- Output formats
+### util.py
+
+Provides utility functions for:
+- Building bandwidth matrices
+- Constructing adjacency matrices from call graphs
+- Splitting graphs into connected components
+- Classifying microservices based on graph components
+
+### main.py
+
+The main script that:
+- Loads and processes the dataset
+- Builds necessary matrices and structures
+- Runs the genetic algorithm with different parameters
+- Reports optimization results
 
 ## Testing
 
-Run the test suite to ensure the model works correctly:
+Run the test script to verify functionality:
 
 ```bash
-python -m pytest tests/
+python Model/test.py
 ```
-
-## Documentation
-
-For detailed documentation, please refer to the `docs/` directory or generate the documentation:
-
-```bash
-sphinx-build -b html docs/ docs/_build/html
-```
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
 
 ## Acknowledgments
 
