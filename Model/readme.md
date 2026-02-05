@@ -102,14 +102,6 @@ Contributions are welcome! Please follow these steps:
 3. Make your changes
 4. Submit a pull request
 
-## License
-
-[MIT License](LICENSE)
-
-## Authors
-
-- [Your Name] - Initial work
-
 ## Acknowledgments
 
 - Alibaba Cloud for providing the microservices trace dataset
